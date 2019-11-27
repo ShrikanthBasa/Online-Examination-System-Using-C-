@@ -1,0 +1,67 @@
+﻿ 
+ //For adding values into database
+
+ SqlConnection con = new SqlConnection("server=DESKTOP-JJA0LFF\\SQLEXPRESS;initial catalog=Logins;integrated security=true");
+        con.Open();
+        SqlCommand cmd = new SqlCommand("insert into [students](Name,Class,RollNo,Subject,EnrollNo,Marks) values(@name,@class,@roll,@subj,@enroll,@marks)", con);
+        cmd.Parameters.AddWithValue("@name", (TextBox1.Text+" "+TextBox2.Text));
+        cmd.Parameters.AddWithValue("@class", (DropDownList1.Text+DropDownList2.Text+"-"+DropDownList3.Text));
+        cmd.Parameters.AddWithValue("@roll", TextBox3.Text);
+        cmd.Parameters.AddWithValue("@subj", DropDownList4.Text);
+        cmd.Parameters.AddWithValue("@enroll", TextBox4.Text);
+        cmd.Parameters.AddWithValue("@marks",1);
+        cmd.ExecuteNonQuery();
+        con.Close();
+
+//for retrieving data from database
+        SqlConnection con = new SqlConnection("server=DESKTOP-JJA0LFF\\SQLEXPRESS;initial catalog=Questions;integrated security=true");
+        con.Open();
+        SqlCommand comm = new SqlCommand("select question from Physics", con);
+        SqlDataReader rd = comm.ExecuteReader();
+        rd.Read();
+            Label1.Text=(rd[0].ToString());
+        con.Close();
+
+//DataBase Queries
+
+ create table Admin(UserName varchar(200),pass varchar(100))
+
+
+     <div>
+        <br />
+       <b style="font-size:large;color:green">Question No :</b>
+        <asp:Label ID="QNoLabel" runat="server"></asp:Label>
+      <fieldset style="margin-top:10px;text-align:center">
+          <br />
+
+
+          <table border="1" style="margin:0px auto; width: 911px;">
+              <tr><th class="auto-style1" style="color: #0000FF; font-size: large;">Question</th><th>
+                  <asp:TextBox ID="TextBox1" runat="server" Height="37px" Width="774px" ReadOnly="true" Columns="3"></asp:TextBox></th>
+              </tr>
+              <tr><th class="auto-style1" style="color: #0000FF">Marks</th><th>
+                  <asp:Label ID="Label1" runat="server" Text="1"></asp:Label></th>
+              </tr>    
+          </table>
+          <br />
+          <b style="font-size: 20px; color: #008000;">:::options:::<br />
+          </b>
+          
+
+          &nbsp;<table border="1" style="margin:0px auto; width: 911px; height: 180px;">
+              <tr><th>1.<asp:RadioButton ID="RadioButton1" runat="server" Height="30px" /><asp:TextBox ID="TextBox2" runat="server" Height="30px" Width="390px" ReadOnly="true" Columns="2"></asp:TextBox></th>
+                  <th>2.<asp:RadioButton ID="RadioButton2" runat="server" Height="30px" /><asp:TextBox ID="TextBox3" runat="server" Height="30px" Width="390px" Columns="2"></asp:TextBox></th>
+              </tr>
+              <tr><th>3.<asp:RadioButton ID="RadioButton3" runat="server" Height="30px" />
+                  <asp:TextBox ID="TextBox4" runat="server" Height="30px" Width="390px" ReadOnly="true" Columns="2"></asp:TextBox></th>
+                  <th>4.<asp:RadioButton ID="RadioButton4" runat="server" Height="30px" />
+                      <asp:TextBox ID="TextBox5" runat="server" Height="30px" Width="390px" ReadOnly="true" Columns="2"></asp:TextBox></th>
+              </tr>
+          </table>
+          <br />
+          <p>
+          <asp:Button ID="Button1" runat="server" style="margin-right:100px;border-radius:5px" Text="<-- Previous" Height="42px" Width="120px" />
+          <asp:Button ID="Button2" runat="server" style="border-radius:5px" Text="Next -->" Height="42px" OnClick="Button2_Click" Width="121px"  />
+          </p>
+          </fieldset>
+    </div>
